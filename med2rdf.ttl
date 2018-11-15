@@ -5,14 +5,17 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
 
 <http://med2rdf.org/ontology/med2rdf#>
     dcterms:created "2018-01-31^^xsd:date" ;
     dcterms:creator "Shuichi Kawashima" ;
-    dcterms:description "Controlled vocabulalies for inteded for use in the MED2RDF project"@en ;
+    dcterms:description "Controlled vocabulalies inteded for using in RDF datasets developed in the MED2RDF project (http://med2rdf.org/)."@en ;
     a owl:Ontology ;
     owl:imports <http://www.w3.org/1999/02/22-rdf-syntax-ns#>, <http://www.w3.org/2004/02/skos/core> ;
-    owl:versionInfo 0.05 .
+    owl:priorVersion "0.05"@en ;
+    owl:versionInfo 0.06 ;
+    <http://www.w3.org/2004/02/skos/core#changeNote> "Add the 'mutated_from_allele' and 'mutated_to_allele' property (Nov 15, 2018 version 0.06)"@en .
 
 :Disease
     a owl:Class ;
@@ -26,6 +29,9 @@
     a owl:Class ;
     rdfs:label "Gene"@en .
 
+:Genome
+    a owl:Class .
+
 :Variation
     a owl:Class ;
     rdfs:label "Variation"@en .
@@ -35,8 +41,8 @@
     rdfs:domain [
         a owl:Class ;
         owl:unionOf (:Variation
-            <http://purl.obolibrary.org/obo/SO_0001060>
-            <http://purl.obolibrary.org/obo/VariO_0001>
+            obo:SO_0001060
+            obo:VariO_0001
         )
     ] ;
     rdfs:range xsd:string .
@@ -64,20 +70,32 @@
     rdfs:domain [
         a owl:Class ;
         owl:unionOf (:Variation
-            <http://purl.obolibrary.org/obo/SO_0001060>
-            <http://purl.obolibrary.org/obo/VariO_0001>
+            obo:SO_0001060
+            obo:VariO_0001
         )
     ] ;
     rdfs:label "gene"@en ;
     rdfs:range :Gene .
+
+:mutated_from_allele
+    dcterms:description "\"mutated_from_allele\" is a relation between a Variation and a nucleotide or consecutive nucleotides before occuring a mutation at a specific region in the genome. This property is assumed to be used in pair with the 'mutated_to_allele\" allele property."@en ;
+    a owl:DatatypeProperty ;
+    rdfs:domain :Variation, obo:SO_0001060, obo:VariO_0001 ;
+    rdfs:range xsd:string .
+
+:mutated_to_allele
+    dcterms:description "\"mutated_to_allele\" is a relation between a Variation and a nucleotide or consecutive nucleotides after occuring a mutation at a specific region in the genome. This property is assumed to be used in pair with the 'mutated_from_allele\" allele property."@en ;
+    a owl:DatatypeProperty ;
+    rdfs:domain :Variation, obo:SO_0001060, obo:VariO_0001 ;
+    rdfs:range xsd:string .
 
 :reference_allele
     a owl:DatatypeProperty ;
     rdfs:domain [
         a owl:Class ;
         owl:unionOf (:Variation
-            <http://purl.obolibrary.org/obo/SO_0001060>
-            <http://purl.obolibrary.org/obo/VariO_0001>
+            obo:SO_0001060
+            obo:VariO_0001
         )
     ] ;
     rdfs:range xsd:string .
@@ -89,14 +107,17 @@
     rdfs:range [
         a owl:Class ;
         owl:unionOf (:Variation
-            <http://purl.obolibrary.org/obo/SO_0001060>
-            <http://purl.obolibrary.org/obo/VariO_0001>
+            obo:SO_0001060
+            obo:VariO_0001
         )
     ] .
 
-<http://purl.obolibrary.org/obo/SO_0001060>
+obo:SO_0001060
     a owl:Class .
 
-<http://purl.obolibrary.org/obo/VariO_0001>
+obo:VariO_0001
     a owl:Class .
+
+dcterms:description
+    a owl:AnnotationProperty .
 
