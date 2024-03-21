@@ -9,14 +9,16 @@
 
 <http://med2rdf.org/ontology/med2rdf#>
     dcterms:contributor "Mayumi Kamada"@en, "Toshiaki Katayama"@en ;
-    dcterms:created "2018-01-31^^xsd:date" ;
+    dcterms:created "2018-01-31" ;
     dcterms:creator "Shuichi Kawashima" ;
     dcterms:description "Controlled vocabulalies inteded for using in RDF datasets developed in the MED2RDF project (http://med2rdf.org/)."@en ;
     a owl:Ontology ;
     owl:imports <http://www.w3.org/1999/02/22-rdf-syntax-ns#>, <http://www.w3.org/2004/02/skos/core> ;
-    owl:priorVersion 0.07 ;
     owl:versionInfo 0.08 ;
     <http://www.w3.org/2004/02/skos/core#changeNote> "Add 'reference_allele_vcf' and 'alternative_allele_vcf' properties (Sep 5, 2019 version 0.08)"@en, "Add 'transcript' 'variant_consequence', 'variant_type' and 'site_primary' property (Jul 14, 2019 version 0.07)"@en, "Add the 'mutated_from_allele' and 'mutated_to_allele' property (Nov 15, 2018 version 0.06)"@en .
+
+:Bin
+    a owl:Class .
 
 :Disease
     a owl:Class ;
@@ -27,6 +29,10 @@
     a owl:Class ;
     rdfs:label "Evidence"@en ;
     <http://www.w3.org/2004/02/skos/core#definition> "A generic class for evidence such as sceintific papers, books or external database entries."@en .
+
+:FrequencyDistribution
+    a owl:Class ;
+    rdfs:label "Frequency distribution"@en .
 
 :Gene
     a owl:Class ;
@@ -68,6 +74,11 @@
     rdfs:label "alternative allele vcf"@en ;
     rdfs:range xsd:string .
 
+:begin
+    a owl:DatatypeProperty ;
+    rdfs:domain :Bin ;
+    rdfs:label "begin"@en .
+
 :caused_by
     a owl:ObjectProperty ;
     rdfs:domain :Disease ;
@@ -81,6 +92,11 @@
     rdfs:label "disease"@en ;
     rdfs:range :Disease ;
     <http://www.w3.org/2004/02/skos/core#definition> "'disease' represents a relation that a Variation causes a Disease"@en .
+
+:end
+    a owl:DatatypeProperty ;
+    rdfs:domain :Bin ;
+    rdfs:label "end"@en .
 
 :evidence
     a owl:ObjectProperty ;
@@ -100,6 +116,16 @@
     rdfs:label "gene"@en ;
     rdfs:range :Gene ;
     <http://www.w3.org/2004/02/skos/core#definition> "\"gene\" represents a relation that a Variation is observed in a Gene or a Genome or a Transcript."@en .
+
+:less_than
+    a owl:DatatypeProperty ;
+    rdfs:domain :Bin ;
+    rdfs:label "less than"@en .
+
+:more_than
+    a owl:DatatypeProperty ;
+    rdfs:domain :Bin ;
+    rdfs:label "more than"@en .
 
 :mutated_from_allele
     dcterms:description "\"mutated_from_allele\" is a relation between a Variation and a nucleotide or consecutive nucleotides before occuring a mutation at a specific region in an individual genome (other than the reference genome). This property is assumed to be used in pair with the 'mutated_to_allele\" allele property."@en ;
@@ -173,6 +199,9 @@ obo:SO_0001060
 
 obo:VariO_0001
     a owl:Class .
+
+dcterms:created
+    a owl:AnnotationProperty .
 
 dcterms:description
     a owl:AnnotationProperty .
