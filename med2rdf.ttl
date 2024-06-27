@@ -44,6 +44,11 @@
     rdfs:label "Genome"@en ;
     <http://www.w3.org/2004/02/skos/core#definition> "A generic class for genome"@en .
 
+:Protein
+    a owl:Class ;
+    rdfs:label "Protein"@en ;
+    <http://www.w3.org/2004/02/skos/core#definition> "A generic class for protein"@en .
+
 :Variation
     a owl:Class ;
     rdfs:label "Variation"@en ;
