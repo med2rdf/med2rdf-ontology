@@ -1,21 +1,22 @@
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix : <http://med2rdf.org/ontology/med2rdf#> .
-@prefix obo: <http://purl.obolibrary.org/obo/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix obo: <http://purl.obolibrary.org/obo/> .
 
 <http://med2rdf.org/ontology/med2rdf#>
-    dcterms:contributor "Mayumi Kamada"@en, "Toshiaki Katayama"@en ;
-    dcterms:created "2018-01-31" ;
-    dcterms:creator "Shuichi Kawashima" ;
-    dcterms:description "Controlled vocabulalies inteded for using in RDF datasets developed in the MED2RDF project (http://med2rdf.org/)."@en ;
+    dct:creator "Shuichi Kawashima" ;
+    dct:contributor "Mayumi Kamada"@en, "Toshiaki Katayama"@en ;
+    dct:created "2018-01-31"^^xsd:date ;
+    dct:description "Controlled vocabulalies inteded for using in RDF datasets developed in the MED2RDF project (http://med2rdf.org/)."@en ;
     a owl:Ontology ;
     owl:imports <http://www.w3.org/1999/02/22-rdf-syntax-ns#>, <http://www.w3.org/2004/02/skos/core> ;
-    owl:versionInfo 0.08 ;
-    <http://www.w3.org/2004/02/skos/core#changeNote> "Add 'reference_allele_vcf' and 'alternative_allele_vcf' properties (Sep 5, 2019 version 0.08)"@en, "Add 'transcript' 'variant_consequence', 'variant_type' and 'site_primary' property (Jul 14, 2019 version 0.07)"@en, "Add the 'mutated_from_allele' and 'mutated_to_allele' property (Nov 15, 2018 version 0.06)"@en .
+    owl:versionInfo 0.09 ;
+    skos:changeNote "Add 'Protein' class and 'protein' property, some refactoring (Jul 1, 2024 version 0.09)"@en, "Add 'reference_allele_vcf' and 'alternative_allele_vcf' properties (Sep 5, 2019 version 0.08)"@en, "Add 'transcript' 'variant_consequence', 'variant_type' and 'site_primary' property (Jul 14, 2019 version 0.07)"@en, "Add the 'mutated_from_allele' and 'mutated_to_allele' property (Nov 15, 2018 version 0.06)"@en .
 
 :Bin
     a owl:Class .
@@ -23,12 +24,12 @@
 :Disease
     a owl:Class ;
     rdfs:label "Disease"@en ;
-    <http://www.w3.org/2004/02/skos/core#definition> "A generic class for disease."@en .
+    skos:definition "A generic class for disease."@en .
 
 :Evidence
     a owl:Class ;
     rdfs:label "Evidence"@en ;
-    <http://www.w3.org/2004/02/skos/core#definition> "A generic class for evidence such as sceintific papers, books or external database entries."@en .
+    skos:definition "A generic class for evidence such as sceintific papers, books or external database entries."@en .
 
 :FrequencyDistribution
     a owl:Class ;
@@ -37,22 +38,22 @@
 :Gene
     a owl:Class ;
     rdfs:label "Gene"@en ;
-    <http://www.w3.org/2004/02/skos/core#definition> "A generic class for gene"@en .
+    skos:definition "A generic class for gene"@en .
 
 :Genome
     a owl:Class ;
     rdfs:label "Genome"@en ;
-    <http://www.w3.org/2004/02/skos/core#definition> "A generic class for genome"@en .
+    skos:definition "A generic class for genome"@en .
 
 :Protein
     a owl:Class ;
     rdfs:label "Protein"@en ;
-    <http://www.w3.org/2004/02/skos/core#definition> "A generic class for protein"@en .
+    skos:definition "A generic class for protein"@en .
 
 :Variation
     a owl:Class ;
     rdfs:label "Variation"@en ;
-    <http://www.w3.org/2004/02/skos/core#definition> "A generic class for genomic variation"@en .
+    skos:definition "A generic class for genomic variation"@en .
 
 :alternative_allele
     a owl:DatatypeProperty ;
@@ -67,7 +68,7 @@
     rdfs:range xsd:string .
 
 :alternative_allele_vcf
-    dcterms:description "\"alternative_allele_vcf\" is a relation between a Variation and a nucleotide or consecutive nucleotides after occuring a mutation at a specific region in the genome with the VCF specification. This property is assumed to be used in pair with the 'reference_allele_vcf\" allele property."@en ;
+    dct:description "'alternative_allele_vcf' is a relation between a Variation and a nucleotide or consecutive nucleotides after occuring a mutation at a specific region in the genome with the VCF specification. This property is assumed to be used in pair with the 'reference_allele_vcf' allele property."@en ;
     a owl:DatatypeProperty ;
     rdfs:domain [
         a owl:Class ;
@@ -89,14 +90,14 @@
     rdfs:domain :Disease ;
     rdfs:label "caused_by"@en ;
     rdfs:range :Variation ;
-    <http://www.w3.org/2004/02/skos/core#definition> "'cuased by' represents a relation that a Disease is caused by a Variation"@en .
+    skos:definition "'cuased by' represents a relation that a Disease is caused by a Variation"@en .
 
 :disease
     a owl:ObjectProperty ;
     rdfs:domain :Variation ;
     rdfs:label "disease"@en ;
     rdfs:range :Disease ;
-    <http://www.w3.org/2004/02/skos/core#definition> "'disease' represents a relation that a Variation causes a Disease"@en .
+    skos:definition "'disease' represents a relation that a Variation causes a Disease"@en .
 
 :end
     a owl:DatatypeProperty ;
@@ -111,16 +112,8 @@
 
 :gene
     a owl:ObjectProperty ;
-    rdfs:domain [
-        a owl:Class ;
-        owl:unionOf (:Variation
-            obo:SO_0001060
-            obo:VariO_0001
-        )
-    ] ;
     rdfs:label "gene"@en ;
-    rdfs:range :Gene ;
-    <http://www.w3.org/2004/02/skos/core#definition> "\"gene\" represents a relation that a Variation is observed in a Gene or a Genome or a Transcript."@en .
+    skos:definition "relationship between an organism, a biological sample and a cell and the gene encoded in their genome."@en .
 
 :less_than
     a owl:DatatypeProperty ;
@@ -133,16 +126,21 @@
     rdfs:label "more than"@en .
 
 :mutated_from_allele
-    dcterms:description "\"mutated_from_allele\" is a relation between a Variation and a nucleotide or consecutive nucleotides before occuring a mutation at a specific region in an individual genome (other than the reference genome). This property is assumed to be used in pair with the 'mutated_to_allele\" allele property."@en ;
+    dct:description "'mutated_from_allele' is a relation between a Variation and a nucleotide or consecutive nucleotides before occuring a mutation at a specific region in an individual genome (other than the reference genome). This property is assumed to be used in pair with the 'mutated_to_allele' allele property."@en ;
     a owl:DatatypeProperty ;
     rdfs:domain :Variation, obo:SO_0001060, obo:VariO_0001 ;
     rdfs:range xsd:string .
 
 :mutated_to_allele
-    dcterms:description "\"mutated_to_allele\" is a relation between a Variation and a nucleotide or consecutive nucleotides after occuring a mutation at a specific region in an individual genome (other than the reference genome). This property is assumed to be used in pair with the 'mutated_from_allele\" allele property."@en ;
+    dct:description "'mutated_to_allele' is a relation between a Variation and a nucleotide or consecutive nucleotides after occuring a mutation at a specific region in an individual genome (other than the reference genome). This property is assumed to be used in pair with the 'mutated_from_allele' allele property."@en ;
     a owl:DatatypeProperty ;
     rdfs:domain :Variation, obo:SO_0001060, obo:VariO_0001 ;
     rdfs:range xsd:string .
+
+:protein
+    a owl:ObjectProperty ;
+    rdfs:label "protein"@en ;
+    skos:definition "relationship between an organism, a biological sample and a cell and the protein encoded in their genome."@en .
 
 :reference_allele
     a owl:DatatypeProperty ;
@@ -157,7 +155,7 @@
     rdfs:range xsd:string .
 
 :reference_allele_vcf
-    dcterms:description "\"reference_allele_vcf\" is a relation between a Variation and a nucleotide or consecutive nucleotides before occuring a mutation at a specific region in the genome with the VCF specification. This property is assumed to be used in pair with the 'alternative_allele_vcf\" allele property."@en ;
+    dct:description "'reference_allele_vcf' is a relation between a Variation and a nucleotide or consecutive nucleotides before occuring a mutation at a specific region in the genome with the VCF specification. This property is assumed to be used in pair with the 'alternative_allele_vcf' allele property."@en ;
     a owl:DatatypeProperty ;
     rdfs:domain [
         a owl:Class ;
@@ -176,7 +174,7 @@
 :transcript
     a owl:ObjectProperty ;
     rdfs:label "transcript"@en ;
-    <http://www.w3.org/2004/02/skos/core#definition> "relationship between an organism, a biological sample and a cell and the transcript encoded in their genome."@en .
+    skos:definition "relationship between an organism, a biological sample and a cell and the transcript encoded in their genome."@en .
 
 :variant_consequence
     a owl:ObjectProperty ;
@@ -188,7 +186,7 @@
 
 :variation
     a owl:ObjectProperty ;
-    rdfs:domain :Gene ;
+    rdfs:domain :Gene, :Transcript, :Protein, :Genome ;
     rdfs:label "variation"@en ;
     rdfs:range [
         a owl:Class ;
@@ -197,7 +195,7 @@
             obo:VariO_0001
         )
     ] ;
-    <http://www.w3.org/2004/02/skos/core#definition> "\"variation\" represents a relation that a Gene or a Genome or aTranscript has a Variation."@en .
+    skos:definition "'variation' represents the relation that a Gene, Transcript, Protein or Genome has a Variation."@en .
 
 obo:SO_0001060
     a owl:Class .
@@ -205,9 +203,10 @@ obo:SO_0001060
 obo:VariO_0001
     a owl:Class .
 
-dcterms:created
+dct:created
     a owl:AnnotationProperty .
 
-dcterms:description
+dct:description
     a owl:AnnotationProperty .
+
 
